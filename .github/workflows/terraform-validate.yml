@@ -4,6 +4,8 @@ on:
   pull_request:
     branches: ["main"]
   workflow_dispatch:
+  push:
+    branches: ["new_branch"]
 
 permissions:
   contents: read
@@ -44,7 +46,7 @@ jobs:
 
   terraform_remote_state:
     name: Verify Azure remote state
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
       contents: read
